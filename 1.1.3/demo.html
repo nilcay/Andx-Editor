@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Andx Editor</title>
+	<script type="text/javascript" src="andx/editor.js"></script>
+	<link rel="stylesheet" type="text/css" href="andx/style.css">
+</head>
+<body>
+	<p>示例一：</p>
+	<form action="" method="post">
+		<textarea id="content1" class="textarea">示例一：内容可以放这里。转义代码可以这样处理：#lt;a href="http://andx.net" target=_blank#gt;ANDX.NET#lt;/a#gt;，如果不处理，则会这样：&lt;a href="http://andx.net" target=_blank&gt;ANDX.NET&lt;/a&gt;，效果等同于：<a href="http://andx.net" target=_blank>ANDX.NET</a></textarea>
+	</form>
+	<script type="text/javascript">
+		var xEditor = new ANDX.Editor("content1", "xEditor", {"width":800, "height":400, "language":"zh-cn", "tools":["format","color","size","bold","italic","underline","left","center","right","ul","ol","outdent","indent","link","unlink","image"], "panel":["full","source"]});
+		xEditor.init();
+		//xEditor.execCommand("insertimage", "1.jpg");
+		//xEditor.post(); //提交前先执行此函数
+	</script>
+	<p>示例二：</p>
+	<form action="" method="post">
+		<textarea id="content2" class="textarea"></textarea>
+	</form>
+	<script type="text/javascript">
+		var content2 = '示例二：内容可以放这里';
+		var xEditor2 = new ANDX.Editor("content2", "xEditor2", {"width":400, "height":200, "content":content2, "language":"en-us", "tools":["bold","italic","underline","link","unlink","image"], "panel":["full"]});
+		xEditor2.init();
+	</script>
+	<p>注意事项:</p>
+	<p>1. 内容可以放在“textarea”标签中（示例一），也可以用JS赋值（示例二）。<br>但示例一初始化内容的方式，存在一个问题：如果内容中有转义过的HTML标签，有可能会被编辑器直接当成html执行，从而导致内容面目全非。<br>本编辑器给出的解决方案是，用户输出“textarea”标签的初始内容，先将“&amp;lt;”转换为“#lt;”,“&amp;gt;”转换为“#gt;”；编辑器会自动还原，从而避免错误发生。<br>示例二的方法不存在前面的问题，但对一些符号或标签比较敏感，如“&lt;javascript&gt;”。<br>（如有改进方案，欢迎提出宝贵意见（QQ862120352））</p>
+	<p>2. 在提交内容到服务器之前，必须先执行XXX.post()这个函数，才能把不同编辑状态下的内容赋值给对应的文本框，否则提交的数据可能不是最新编辑的。（重要！重要！重要！）</p>
+	<p>3. var newName = ANDX.Editor(id, objectId, config) <br>这里的newName和objectId是要相同的。<br>config中，width：编辑器宽度，height：编辑器高度，content：初始内容，language：语言，tools：左上角显示的图标或选项，panel：右上角显示的图标。</p>
+	<p>其它:</p>
+	<p>Andx Editor是ANDX CMS项目默认的html编辑器，功能上不能与其它知名编辑器并论，主要优点是轻量，总共只有几十KB，适合对编辑器要求不高的用户。</p>
+	<p>QQ 群：274376194</p>
+	<p>ANDX官网：<a href="http://andx.net" target=_blank>http://andx.net</a></p>
+	<p>GitHub：<a href="https://github.com/nilcay/" target=_blank>https://github.com/nilcay/</a></p>
+
+</body>
+</html>
